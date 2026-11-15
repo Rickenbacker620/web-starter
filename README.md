@@ -56,6 +56,12 @@ Notes:
 Dependabot updates everything except the Vite+ toolchain (`vite-plus`, the `vite` alias, `vitest`),
 because Dependabot cannot keep the `overrides` pins in sync.
 
+Minor and patch updates are merged automatically once CI passes
+(`.github/workflows/dependabot-automerge.yml`); major updates need a manual review. This needs two
+repo settings: **Allow auto-merge** (Settings → General) and a ruleset on `main` that requires the
+`ci` status check (Settings → Rules), with repository admins on the bypass list so direct pushes
+to `main` keep working.
+
 To upgrade Vite+, install the current lockfile first (the migrator reads it), then run the
 latest migrator. It re-pins `vite-plus` and the `vite` → `@voidzero-dev/vite-plus-core`
 alias together:
