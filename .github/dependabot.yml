@@ -1,0 +1,32 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Wait a few days after a release before proposing it (supply-chain safety).
+    cooldown:
+      default-days: 3
+    # The Vite+ toolchain is upgraded manually (see README): Dependabot cannot keep
+    # vite-plus, the `vite` alias and the `overrides` pins in sync.
+    ignore:
+      - dependency-name: vite-plus
+      - dependency-name: vite
+      - dependency-name: "@voidzero-dev/vite-plus-core"
+      - dependency-name: vitest
+    groups:
+      react:
+        patterns:
+          - react
+          - react-dom
+          - "@types/react"
+          - "@types/react-dom"
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
